@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1E1B8C"><title>El cambio, en trazos · BICG</title>
+<style>
+:root{--navy:#1E1B8C;--blue:#2F7FFF;--cyan:#59D8FF;--pale:#DBEFF9;--aqua:#04BFBF;--ink:#24233e;--muted:#666987;--line:#dfe6f6;--bg:#f6f8ff;--pink:#FF2F92}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Calibri,'Century Gothic',Arial,sans-serif;color:var(--ink)}button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}.shell{max-width:1320px;margin:auto;padding:22px 30px 60px}.top{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:45px}.brand{display:flex;align-items:center;gap:20px}.logo{width:105px;max-height:55px;object-fit:contain}.brandtext{font-size:12px;text-transform:uppercase;letter-spacing:2.5px;font-weight:bold;color:var(--navy);border-left:1px solid #cbd8ef;padding-left:18px}.pill{display:inline-flex;align-items:center;gap:8px;background:white;border:1px solid var(--line);border-radius:100px;color:var(--navy);font-weight:bold;padding:9px 15px;font-size:13px}.dot{background:#95a1b5;border-radius:100%;width:8px;height:8px}.dot.live{background:var(--aqua)}h1{font-size:clamp(45px,6.1vw,83px);line-height:.95;color:var(--navy);letter-spacing:-3px;margin:12px 0 24px;max-width:850px}h2{font-size:clamp(25px,3vw,38px);line-height:1.1;color:var(--navy);margin:0 0 15px}h3{color:var(--navy);margin:0 0 12px;font-size:21px}p{line-height:1.5}.eyebrow{font-size:13px;color:var(--blue);font-weight:800;letter-spacing:3px;text-transform:uppercase}.sub{font-size:20px;color:var(--muted);max-width:720px}.hero{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:42px;margin:60px 0}.art{min-height:420px;border-radius:32px;background:linear-gradient(140deg,#daeafa,#eff5ff);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}.art svg{width:85%;height:auto}.card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:0 13px 45px rgba(30,27,140,.035)}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}.btn{background:var(--navy);color:#fff;border:1px solid var(--navy);border-radius:100px;padding:14px 22px;font-weight:800;transition:transform .15s,background .15s}.btn:hover:not(:disabled){transform:translateY(-1px);background:#3530a3}.btn.secondary{background:white;color:var(--navy);border:1px solid #c9d2f5}.btn.secondary:hover{background:#edf2ff}.btn.quiet{background:transparent;color:var(--navy);border-color:transparent;padding:10px 14px}.btn.pink{background:var(--pink);border-color:var(--pink)}.btn.small{padding:10px 15px;font-size:14px}.field{display:block;color:var(--navy);font-weight:bold;font-size:14px;margin:18px 0 7px}.input{width:100%;padding:14px 17px;border:1.5px solid #cdd8ec;border-radius:13px;background:#fff;color:var(--navy);outline-color:var(--blue);font-size:17px}.codeinput{text-transform:uppercase;letter-spacing:4px;font-weight:bold}.hidden{display:none!important}.workspace{display:grid;grid-template-columns:1fr 330px;gap:24px}.meta{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 23px}.timer{display:inline-flex;align-items:center;font-size:clamp(40px,5vw,67px);font-weight:900;color:var(--navy);font-variant-numeric:tabular-nums;letter-spacing:-1px}.timer.urgent{color:#e03b73}.prompt{font-size:clamp(25px,3.6vw,43px);font-weight:800;color:var(--navy);line-height:1.12;max-width:850px;margin:18px 0}.fine{font-size:14px;color:var(--muted)}.notice{border-radius:14px;background:#eff7ff;border:1px solid #daeafd;padding:13px 15px;font-size:14px;color:#334d7c}.notice.warn{background:#fff5f5;border-color:#ffd2dc;color:#8d2a46}.linkbox{background:#f4f7ff;padding:13px;border:1px dashed #b8c9ec;border-radius:13px;color:var(--navy);font-size:14px;overflow-wrap:anywhere}.count{font-size:43px;color:var(--navy);font-weight:900;line-height:1}.admin-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}.admin-buttons .btn{padding:12px 10px;font-size:14px}.canvaswrap{background:#fff;border-radius:18px;border:2px solid var(--line);overflow:hidden;position:relative}.canvaswrap canvas{display:block;width:100%;height:auto;aspect-ratio:16/10;touch-action:none;cursor:crosshair}.tools{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:0 0 12px}.swatch{width:30px;height:30px;border:3px solid white;border-radius:50%;box-shadow:0 0 0 1px #d8deea;cursor:pointer}.swatch.selected{box-shadow:0 0 0 3px var(--blue)}.tool{border:1px solid #d5def1;background:white;color:var(--navy);border-radius:12px;padding:9px 12px;font-weight:bold}.tool.active{background:#e2eaff;border-color:var(--blue)}.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.drawing{background:white;border:1px solid var(--line);padding:12px;border-radius:18px;box-shadow:0 8px 20px rgba(18,20,80,.035);cursor:pointer}.drawing img{display:block;width:100%;aspect-ratio:16/10;object-fit:contain;border-radius:12px;background:#fff;border:1px solid #edf0f8}.drawing .name{padding:11px 3px 2px;font-weight:800;color:var(--navy);font-size:18px;overflow-wrap:anywhere}.overlay{position:fixed;inset:0;background:#10113cdd;z-index:20;display:flex;align-items:center;justify-content:center;padding:30px}.overlay-inner{width:min(1050px,100%);background:white;border-radius:22px;padding:22px;position:relative}.overlay img{width:100%;max-height:70vh;object-fit:contain}.x{position:absolute;right:15px;top:12px;background:#f0f2fa;color:var(--navy);border:0;border-radius:50%;font-weight:bold;width:36px;height:36px}.foot{padding-top:50px;color:#7d839b;font-size:12px}.steps{display:flex;gap:12px;flex-wrap:wrap;margin-top:15px}.step{background:#eef3ff;border-radius:25px;padding:10px 16px;color:var(--navy);font-size:14px;font-weight:700}.step b{color:var(--blue)}.topline{display:flex;gap:12px;justify-content:space-between;align-items:start;flex-wrap:wrap}.badge{background:#e9f1ff;border-radius:100px;padding:9px 14px;color:var(--navy);font-weight:bold}.empty{background:#fff;border:2px dashed #d2dcf0;border-radius:23px;padding:60px 25px;text-align:center;color:var(--muted)}.empty strong{display:block;color:var(--navy);font-size:23px}.progress{height:8px;background:#e6ecf8;border-radius:12px;overflow:hidden}.progress>div{height:100%;width:0;background:var(--aqua);transition:width .3s}.help{margin:15px 0;color:#70778e;font-size:14px}.present .shell{max-width:100%;padding:24px 40px}.present .gallery{grid-template-columns:repeat(4,minmax(0,1fr))}.present h1{font-size:50px}.present .top{margin-bottom:15px}@media(max-width:900px){.workspace,.hero{grid-template-columns:1fr}.hero{margin-top:20px}.art{min-height:260px}.gallery,.present .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.shell{padding:17px 14px 40px}.top{margin-bottom:25px}.logo{width:75px}.brandtext{font-size:10px;padding-left:10px}.hero{gap:15px}.card{padding:18px}.gallery,.present .gallery{grid-template-columns:1fr}.admin-buttons{grid-template-columns:1fr}h1{letter-spacing:-2px}.art{display:none}.present .shell{padding:15px}}
+.drawing.mine{outline:3px solid var(--aqua)}.lbnav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:8px 12px 0}.lbnav h3{margin:0;flex:1;min-width:120px}.checkrow{display:flex;gap:9px;align-items:center;margin-top:16px;font-size:14px;color:var(--navy);font-weight:bold}.checkrow input{width:18px;height:18px;accent-color:var(--navy)}</style>
+</head><body>
+<div class="shell" id="shell">
+<header class="top"><div class="brand"><img class="logo" src="https://bicg.com/wp-content/uploads/2023/08/BICG_C-1.svg" alt="BICG" onerror="this.style.display='none'"><span class="brandtext">TRANSFORMATION TEAM<br>EXCHANGE</span></div><div class="pill"><i class="dot" id="statusDot"></i><span id="connectionStatus">Actividad interactiva</span></div></header>
+<section id="home">
+<div class="hero"><div><div class="eyebrow">ICEBREAKER · 1 MINUTO 30 SEGUNDOS</div><h1>El cambio,<br>en trazos.</h1><p class="sub">Una misma idea. Diferentes perspectivas. Dibujemos cómo vemos el cambio y descubramos qué nos une.</p><div class="actions"><button class="btn" id="createBtn">Soy facilitador/a · Crear sesión ↗</button><button class="btn secondary" id="joinBtn">Soy participante · Unirme</button></div><div class="steps"><span class="step"><b>01</b> Imagina</span><span class="step"><b>02</b> Dibuja</span><span class="step"><b>03</b> Descubre</span><span class="step"><b>04</b> Reflexiona</span></div></div><div class="art"><svg viewBox="0 0 500 400" role="img" aria-label="Ilustración abstracta de dibujos e ideas"><rect x="89" y="48" rx="26" width="320" height="300" fill="white" transform="rotate(-6 250 200)"/><path d="M155 237c16-100 94-115 118-46s106-81 121-12" stroke="#1E1B8C" stroke-width="13" fill="none" stroke-linecap="round"/><circle cx="191" cy="132" r="30" fill="#59D8FF"/><path d="M129 297l70-49 48 40 79-83 47 82" stroke="#04BFBF" fill="none" stroke-width="12" stroke-linejoin="round"/><path d="M302 60l48 60m-48 0 48-60" stroke="#FF2F92" stroke-width="12" stroke-linecap="round"/><path d="M94 63L44 20M81 75L28 83" stroke="#2F7FFF" stroke-width="10" stroke-linecap="round"/><path d="M403 299l46 27-29-47" fill="#98D934"/></svg></div></div>
+</section>
+<section id="joinView" class="hidden"><div style="max-width:550px;margin:40px auto"><div class="eyebrow">PARTICIPANTE</div><h1>Tu mirada cuenta.</h1><div class="card"><label class="field" for="nameInput">¿Cómo te llamas?</label><input id="nameInput" class="input" maxlength="45" placeholder="Nombre y apellido" autocomplete="name"><label class="field" for="roomInput">Código de la sesión</label><input id="roomInput" class="input codeinput" maxlength="6" placeholder="EJ. A7K2M9" autocomplete="off"><div class="actions"><button id="connectBtn" class="btn">Entrar a la actividad ↗</button><button class="btn secondary" id="backJoin">Volver</button></div><p class="fine" id="joinStatus"></p></div></div></section>
+<section id="hostView" class="hidden"><div class="topline"><div><div class="eyebrow">PANEL DEL FACILITADOR</div><h1 id="hostTitle">El cambio,<br>en trazos.</h1></div><div class="card" style="padding:18px 24px;min-width:190px"><div class="fine">TIEMPO RESTANTE</div><div id="hostTimer" class="timer">01:30</div></div></div><div class="workspace"><main><div class="card"><span class="badge" id="hostStage">Preparando la actividad</span><label class="field" for="promptInput">La consigna que van a dibujar</label><textarea class="input" id="promptInput" rows="2">Dibuja una cultura abierta y colaborativa</textarea><p class="fine">Una consigna abierta funciona mejor: no hay respuestas correctas ni incorrectas.</p><div class="actions"><button class="btn" id="startBtn">Comenzar 1:30 ▶</button><button class="btn secondary" id="revealBtn">Mostrar dibujos</button><button class="btn secondary" id="restartBtn">Nueva ronda</button></div><p class="help">La cuenta comienza para todos al pulsar «Comenzar». Si alguien entra tarde, verá el tiempo restante.</p></div><div style="margin-top:25px"><div class="topline"><h2>Dibujos recibidos <span id="drawingTotal">(0)</span></h2><button class="btn quiet small" id="presentBtn">⛶ Modo proyección</button></div><div id="hostGallery" class="gallery"><div class="empty" style="grid-column:1/-1"><strong>Aún no hay dibujos</strong>En cuanto los participantes envíen sus ilustraciones, aparecerán aquí.</div></div></div></main><aside><div class="card"><h3>Invita al equipo</h3><div class="fine">CÓDIGO DE LA SESIÓN</div><div id="hostCode" style="color:var(--navy);font-size:45px;font-weight:900;letter-spacing:5px">······</div><div class="linkbox" id="hostLink">Preparando enlace…</div><div class="actions"><button class="btn secondary small" id="copyLinkBtn">Copiar enlace</button><button class="btn secondary small" id="copyCodeBtn">Copiar código</button></div><p class="fine">Cada persona entra desde su móvil o computadora y escribe su nombre.</p></div><div class="card" style="margin-top:18px"><h3>Participación</h3><div class="count" id="participantsCount">0</div><p class="fine">personas conectadas</p><div class="progress"><div id="submissionProgress"></div></div><p class="fine" id="submissionsLabel">0 dibujos enviados</p><label class="checkrow"><input type="checkbox" id="namesChk" checked> Mostrar nombres en la galería</label><hr style="border:0;border-top:1px solid var(--line);margin:23px 0"><div class="admin-buttons"><button class="btn secondary" id="downloadBtn">↓ Descargar dibujos</button><button class="btn secondary" id="demoBtn">+ Ejemplos de prueba</button></div></div><div class="notice" style="margin-top:18px">La sesión vive en el servidor: si recargas o cambias de dispositivo, vuelve a entrar con tu enlace de facilitador.<div class="actions" style="margin-top:12px"><button class="btn secondary small" id="copyHostBtn">Copiar enlace de facilitador</button></div><p class="fine" style="margin:10px 0 0">No lo compartas: quien lo tenga controla la sesión.</p></div></aside></div></section>
+<section id="participantView" class="hidden"><div class="topline"><div><div class="eyebrow" id="participantStage">PARTICIPANTE</div><h1 style="font-size:clamp(44px,5vw,65px)" id="participantGreeting">Tu interpretación<br>del cambio.</h1></div><div class="card" style="padding:15px 25px"><div class="fine">TIEMPO RESTANTE</div><div class="timer" id="participantTimer">01:30</div></div></div><div class="card"><div class="prompt" id="participantPrompt">Esperando la consigna…</div><div class="fine" id="participantInstructions">Tendrás 1 minuto y 30 segundos para dibujar, sin letras ni números. No hace falta saber dibujar.</div><div id="drawArea" class="hidden" style="margin-top:22px"><div class="tools"><span class="fine" style="margin-right:6px">COLOR</span><button class="swatch selected" data-color="#1E1B8C" style="background:#1E1B8C" title="Azul oscuro" aria-label="Azul oscuro"></button><button class="swatch" data-color="#2F7FFF" style="background:#2F7FFF" title="Azul" aria-label="Azul"></button><button class="swatch" data-color="#04BFBF" style="background:#04BFBF" title="Aqua" aria-label="Aqua"></button><button class="swatch" data-color="#FF2F92" style="background:#FF2F92" title="Magenta" aria-label="Magenta"></button><button class="swatch" data-color="#1D1D1B" style="background:#1D1D1B" title="Negro" aria-label="Negro"></button><button class="swatch" data-color="#98D934" style="background:#98D934" title="Verde" aria-label="Verde"></button><span style="flex:1"></span><button class="tool" id="eraserBtn">Borrador</button><button class="tool" id="undoBtn">↶ Deshacer</button><button class="tool" id="clearBtn">Limpiar</button></div><div class="canvaswrap"><canvas id="paint" width="960" height="600" aria-label="Lienzo para dibujar"></canvas></div><div class="topline" style="align-items:center;margin-top:17px"><div class="fine">Dibuja con el dedo, ratón o lápiz digital.</div><button class="btn" id="submitBtn">Enviar mi dibujo ↗</button></div></div><div id="waitingArea" class="notice" style="margin-top:20px">La persona facilitadora comenzará la actividad en breve.</div><div id="editRow" class="actions hidden"><button class="btn secondary small" id="editBtn">Modificar mi dibujo</button></div></div><div style="margin-top:22px" id="participantGallery" class="hidden"><h2>Una idea. Muchas miradas.</h2><div class="gallery" id="participantGalleryGrid"></div></div></section>
+<div class="foot">BICG · Transformation Team Exchange · Una experiencia para conversar sobre el cambio</div></div>
+<div id="lightbox" class="overlay hidden" role="dialog" aria-label="Dibujo ampliado"><div class="overlay-inner"><button class="x" id="closeLightbox">×</button><img id="bigImage" alt="Dibujo ampliado"><div class="lbnav"><h3 id="bigName"></h3><span id="lbNav"><button class="btn secondary small" id="prevBtn" aria-label="Anterior">←</button> <button class="btn secondary small" id="nextBtn" aria-label="Siguiente">→</button></span><button class="btn secondary small hidden" id="removeBtn">Quitar dibujo</button></div></div></div>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const views=['home','joinView','hostView','participantView'];
+const W=960,H=600,TIME_MS=90000;
+const ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
+const rand=()=>(window.crypto&&crypto.randomUUID)?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now().toString(36)+Math.random().toString(36).slice(2);
+const safe=t=>String(t||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const timer=t=>{const secs=Math.max(0,Math.ceil(t/1000));return String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0')};
+
+let role=null,room='',hostKey=null,name=ls.get('dlf_name')||'';
+let pid=ls.get('dlf_pid');if(!pid||!/^[\w-]{8,64}$/.test(pid)){pid=rand();ls.set('dlf_pid',pid)}
+let S=null,es=null,offset=0;
+let strokes=[],cur=null,color='#1E1B8C',eraser=false;
+let curRound=null,submitted=false,busy=false,lastAuto=0,wasDrawing=false,promptSynced=false;
+let lbList=[],lbIdx=0;
+const imgCache=new Map();
+
+const nowMs=()=>Date.now()+offset;
+const stageOf=()=>!S||S.phase==='idle'?'lobby':S.phase==='draw'?'drawing':'gallery';
+const isDrawing=()=>stageOf()==='drawing'&&nowMs()<S.endAt;
+const show=id=>{views.forEach(v=>$(v).classList.toggle('hidden',v!==id));window.scrollTo(0,0)};
+const setStatus=(s,live=false)=>{$('connectionStatus').textContent=s;$('statusDot').classList.toggle('live',live)};
+const inviteUrl=()=>location.origin+'/?room='+room;
+function post(path,body){
+  return fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+    .then(r=>r.json().catch(()=>({})).then(j=>({ok:r.ok,status:r.status,json:j})));
+}
+
+/* ---------- lienzo ---------- */
+const canvas=$('paint'),ctx=canvas.getContext('2d');
+function paint(c,list){
+  c.fillStyle='#fff';c.fillRect(0,0,W,H);c.lineCap='round';c.lineJoin='round';
+  (list||[]).forEach(s=>{
+    const p=s.p;if(!p||p.length<2)return;
+    c.strokeStyle=s.c;c.fillStyle=s.c;c.lineWidth=s.w;
+    if(p.length<4){c.beginPath();c.arc(p[0],p[1],s.w/2,0,Math.PI*2);c.fill();return}
+    c.beginPath();c.moveTo(p[0],p[1]);
+    for(let i=2;i<p.length-2;i+=2)c.quadraticCurveTo(p[i],p[i+1],(p[i]+p[i+2])/2,(p[i+1]+p[i+3])/2);
+    c.lineTo(p[p.length-2],p[p.length-1]);c.stroke();
+  });
+}
+const redraw=()=>paint(ctx,strokes);
+function pt(e){const r=canvas.getBoundingClientRect();return[Math.round((e.clientX-r.left)*W/r.width),Math.round((e.clientY-r.top)*H/r.height)]}
+function addPt(e){
+  const q=pt(e),p=cur.p,n=p.length;
+  if(n>=2&&Math.abs(p[n-2]-q[0])<2&&Math.abs(p[n-1]-q[1])<2)return;
+  p.push(q[0],q[1]);
+}
+canvas.addEventListener('pointerdown',e=>{
+  if(role!=='participant'||!isDrawing()||submitted)return;
+  e.preventDefault();canvas.setPointerCapture(e.pointerId);
+  cur={c:eraser?'#ffffff':color,w:eraser?35:5,p:[]};addPt(e);strokes.push(cur);redraw();
+});
+canvas.addEventListener('pointermove',e=>{if(!cur)return;addPt(e);redraw()});
+const finish=()=>{cur=null};
+canvas.addEventListener('pointerup',finish);canvas.addEventListener('pointercancel',finish);
+redraw();
+
+document.querySelectorAll('.swatch').forEach(b=>b.addEventListener('click',()=>{
+  color=b.dataset.color;eraser=false;$('eraserBtn').classList.remove('active');
+  document.querySelectorAll('.swatch').forEach(x=>x.classList.toggle('selected',x===b));
+}));
+$('eraserBtn').onclick=()=>{eraser=!eraser;$('eraserBtn').classList.toggle('active',eraser)};
+$('undoBtn').onclick=()=>{if(submitted)return;strokes.pop();redraw()};
+$('clearBtn').onclick=()=>{if(submitted)return;if(confirm('¿Borrar tu dibujo y comenzar de nuevo?')){strokes=[];redraw()}};
+
+/* ---------- envío del dibujo ---------- */
+function submit(auto){
+  if(busy||submitted)return;
+  if(!strokes.length){if(!auto)alert('Haz un dibujo antes de enviarlo.');return}
+  busy=true;$('submitBtn').disabled=true;
+  post('/api/rooms/'+room+'/drawing',{pid,name,strokes}).then(r=>{
+    if(r.ok)submitted=true;
+    else if(!auto)alert((r.json&&r.json.error)||'No se pudo enviar el dibujo. Inténtalo de nuevo.');
+  }).catch(()=>{if(!auto)alert('Sin conexión con la sesión. Inténtalo de nuevo.')})
+  .then(()=>{busy=false;$('submitBtn').disabled=false;renderParticipant()});
+  renderParticipant();
+}
+$('submitBtn').onclick=()=>{if(!isDrawing()){alert('El tiempo ha terminado.');return}submit(false)};
+$('editBtn').onclick=()=>{if(isDrawing()){submitted=false;renderParticipant()}};
+
+/* ---------- galería ---------- */
+function imgOf(d){
+  const key=d.id+':'+d.t;let u=imgCache.get(key);
+  if(!u){const c=document.createElement('canvas');c.width=W;c.height=H;paint(c.getContext('2d'),d.strokes);u=c.toDataURL('image/jpeg',.85);imgCache.set(key,u)}
+  return u;
+}
+function galleryItems(list){return list.map((d,i)=>({id:d.id,name:S.showNames&&d.name?d.name:'Dibujo '+(i+1),src:imgOf(d),mine:!!d.mine}))}
+function renderGallery(el,list,emptyMsg){
+  if(!list.length){el.innerHTML='<div class="empty" style="grid-column:1/-1"><strong>Aún no hay dibujos</strong>'+safe(emptyMsg||'Se mostrarán aquí conforme lleguen las aportaciones.')+'</div>';return}
+  const items=galleryItems(list);
+  el.innerHTML=items.map((d,i)=>`<article class="drawing${d.mine?' mine':''}" tabindex="0" data-idx="${i}"><img alt="Dibujo de ${safe(d.name)}" src="${d.src}"><div class="name">${safe(d.name)}</div></article>`).join('');
+  el.querySelectorAll('.drawing').forEach(node=>{
+    const fn=()=>openLb(items,Number(node.dataset.idx));
+    node.addEventListener('click',fn);node.addEventListener('keydown',e=>{if(e.key==='Enter')fn()});
+  });
+  if(!$('lightbox').classList.contains('hidden')){
+    lbList=items;if(lbIdx>=lbList.length)lbIdx=lbList.length-1;
+    if(lbIdx<0)closeLb();else showLb();
+  }
+}
+function openLb(items,i){lbList=items;lbIdx=i;showLb();$('lightbox').classList.remove('hidden')}
+function closeLb(){$('lightbox').classList.add('hidden')}
+function showLb(){
+  const it=lbList[lbIdx];if(!it)return;
+  $('bigImage').src=it.src;$('bigName').textContent=it.name;
+  $('removeBtn').classList.toggle('hidden',role!=='host');
+  $('lbNav').classList.toggle('hidden',lbList.length<2);
+}
+function stepLb(k){if(!lbList.length)return;lbIdx=(lbIdx+k+lbList.length)%lbList.length;showLb()}
+$('prevBtn').onclick=()=>stepLb(-1);$('nextBtn').onclick=()=>stepLb(1);
+$('closeLightbox').onclick=closeLb;
+$('lightbox').onclick=e=>{if(e.target===$('lightbox'))closeLb()};
+$('removeBtn').onclick=()=>{
+  const it=lbList[lbIdx];if(!it||role!=='host')return;
+  if(confirm('¿Quitar este dibujo de la galería?')){post('/api/rooms/'+room+'/remove',{k:hostKey,id:it.id});closeLb()}
+};
+document.addEventListener('keydown',e=>{
+  if($('lightbox').classList.contains('hidden'))return;
+  if(e.key==='Escape')closeLb();
+  if(e.key==='ArrowLeft')stepLb(-1);
+  if(e.key==='ArrowRight')stepLb(1);
+});
+
+/* ---------- vistas ---------- */
+function renderHost(){
+  if(role!=='host'||!S)return;
+  const stage=stageOf(),n=S.count;
+  $('drawingTotal').textContent='('+n+')';
+  $('participantsCount').textContent=S.online;
+  $('submissionProgress').style.width=(S.online?Math.min(100,n/S.online*100):0)+'%';
+  $('submissionsLabel').textContent=n+' dibujo'+(n===1?'':'s')+' enviado'+(n===1?'':'s');
+  $('hostStage').textContent=({lobby:'Preparando la actividad',drawing:'Dibujando en vivo',gallery:'Galería y reflexión'})[stage];
+  $('promptInput').disabled=stage==='drawing';
+  $('startBtn').disabled=stage==='drawing';
+  $('revealBtn').disabled=stage!=='drawing';
+  $('namesChk').checked=!!S.showNames;
+  if(stage==='gallery')renderGallery($('hostGallery'),S.drawings||[]);
+  else renderGallery($('hostGallery'),[],stage==='drawing'?'Los dibujos aparecerán aquí cuando termine el tiempo o pulses «Mostrar dibujos».':'Cuando empiece la ronda y termine el tiempo, los dibujos aparecerán aquí.');
+}
+function renderParticipant(){
+  if(role!=='participant'||!S)return;
+  const stage=stageOf(),drawing=isDrawing();
+  $('participantPrompt').textContent=S.phrase||'Esperando la consigna…';
+  $('participantStage').textContent=stage==='lobby'?'PREPARANDO LA ACTIVIDAD':stage==='drawing'?'ES TU MOMENTO DE CREAR':'UNA IDEA, MUCHAS MIRADAS';
+  $('drawArea').classList.toggle('hidden',!drawing||submitted);
+  $('waitingArea').classList.toggle('hidden',drawing&&!submitted);
+  $('editRow').classList.toggle('hidden',!(drawing&&submitted));
+  $('participantGallery').classList.toggle('hidden',stage!=='gallery');
+  let msg='';
+  if(stage==='lobby')msg='La persona facilitadora comenzará la actividad en breve.';
+  else if(busy)msg='Enviando dibujo…';
+  else if(submitted)msg='✓ Dibujo recibido por el facilitador. ¡Gracias!';
+  else if(stage==='drawing'&&!drawing)msg='El tiempo ha terminado. Esperando la galería…';
+  if(stage==='gallery'){
+    msg='Mira las diferentes interpretaciones. ¿Qué patrones encuentras? ¿Qué te sorprende?';
+    renderGallery($('participantGalleryGrid'),S.drawings||[]);
+  }else $('participantGalleryGrid').innerHTML='';
+  $('waitingArea').textContent=msg;
+  $('participantInstructions').textContent='Representa la idea con formas e imágenes: sin palabras ni números. No hay respuestas correctas.';
+}
+function syncRound(){
+  if(curRound===S.round)return;
+  curRound=S.round;wasDrawing=false;lastAuto=0;
+  if(S.mine){strokes=S.mine.strokes.map(s=>({c:s.c,w:s.w,p:s.p.slice()}));submitted=true}
+  else{strokes=[];submitted=false}
+  redraw();
+}
+
+/* ---------- conexión ---------- */
+function connect(){
+  const url='/api/rooms/'+room+'/events?pid='+encodeURIComponent(pid)+(role==='host'&&hostKey?'&k='+encodeURIComponent(hostKey):'');
+  es=new EventSource(url);
+  es.addEventListener('state',e=>{
+    S=JSON.parse(e.data);offset=S.now-Date.now();
+    if(role==='host'&&!S.host){
+      es.close();role=null;ls.del('dlf_k_'+room);hostKey=null;
+      alert('Este enlace ya no da acceso de facilitador a la sesión. Puedes entrar como participante.');
+      show('joinView');return;
+    }
+    setStatus(role==='host'?'Sesión lista':'Conectado a la sesión',true);
+    if(role==='host'&&!promptSynced){promptSynced=true;if(S.phrase)$('promptInput').value=S.phrase}
+    if(role==='participant'){syncRound();renderParticipant()}else renderHost();
+  });
+  es.onerror=()=>{setStatus(es.readyState===2?'Sesión no disponible':'Reconectando…')};
+}
+function enterHost(){
+  role='host';show('hostView');
+  $('hostCode').textContent=room;$('hostLink').textContent=inviteUrl();
+  setStatus('Conectando sala…');connect();
+}
+function hostCreate(){
+  $('createBtn').disabled=true;
+  post('/api/rooms',{}).then(r=>{
+    $('createBtn').disabled=false;
+    if(!r.ok){alert((r.json&&r.json.error)||'No se pudo crear la sesión.');return}
+    room=r.json.code;hostKey=r.json.hostKey;ls.set('dlf_k_'+room,hostKey);
+    history.replaceState(null,'','/?room='+room);enterHost();
+  }).catch(()=>{$('createBtn').disabled=false;alert('No se pudo conectar con el servidor. Comprueba tu conexión a internet.')});
+}
+function joinRoom(){
+  room=$('roomInput').value.trim().toUpperCase();name=$('nameInput').value.trim();
+  if(!name||!/^[A-Z2-9]{6}$/.test(room)){$('joinStatus').textContent='Escribe tu nombre y el código de 6 caracteres.';return}
+  $('joinStatus').textContent='Conectando con la sesión…';$('connectBtn').disabled=true;
+  fetch('/api/rooms/'+room).then(r=>{
+    $('connectBtn').disabled=false;
+    if(r.status===404){$('joinStatus').textContent='No existe esa sesión. Verifica el código y que el facilitador la haya creado.';return}
+    if(!r.ok)throw new Error('http');
+    ls.set('dlf_name',name);role='participant';
+    $('participantGreeting').textContent='Hola, '+name.split(/\s+/)[0]+'.';
+    history.replaceState(null,'','/?room='+room);
+    show('participantView');renderParticipant();connect();
+  }).catch(()=>{$('connectBtn').disabled=false;$('joinStatus').textContent='No fue posible conectarse. Revisa la red o inténtalo de nuevo.'});
+}
+
+/* ---------- acciones del facilitador ---------- */
+function start(){
+  const p=($('promptInput').value||'').trim();
+  if(!p){alert('Escribe una consigna para el equipo.');return}
+  post('/api/rooms/'+room+'/phrase',{k:hostKey,phrase:p.slice(0,200),duration:TIME_MS,showNames:$('namesChk').checked})
+    .then(r=>{if(!r.ok)alert((r.json&&r.json.error)||'No se pudo comenzar la ronda.')});
+}
+function reveal(){post('/api/rooms/'+room+'/phase',{k:hostKey,phase:'reveal'})}
+function reset(){
+  if(stageOf()==='drawing'&&!confirm('¿Terminar la ronda actual y preparar una nueva?'))return;
+  post('/api/rooms/'+room+'/phase',{k:hostKey,phase:'idle'});
+}
+function demoStrokes(seed){
+  const cols=['#1E1B8C','#2F7FFF','#04BFBF','#FF2F92','#98D934'],out=[];
+  for(let k=0;k<5;k++){
+    const p=[];
+    for(let i=0;i<70;i++){
+      const a=i/69*Math.PI*2,rad=55+14*Math.sin(i*.24+seed+k);
+      p.push(Math.round(200+k*120+rad*Math.cos(a)),Math.round(270+50*Math.sin(seed+k)+rad*Math.sin(a)));
+    }
+    out.push({c:cols[(k+seed)%cols.length],w:16,p});
+  }
+  return out;
+}
+$('demoBtn').onclick=()=>{
+  if(stageOf()==='drawing'){alert('Los ejemplos solo están disponibles antes o después de la ronda.');return}
+  post('/api/rooms/'+room+'/demo',{k:hostKey,phrase:($('promptInput').value||'').trim(),items:[
+    {name:'Ejemplo · Ana',strokes:demoStrokes(1)},{name:'Ejemplo · Carlos',strokes:demoStrokes(3)},{name:'Ejemplo · Paula',strokes:demoStrokes(5)}]});
+};
+$('downloadBtn').onclick=()=>{
+  if(stageOf()!=='gallery'||!(S.drawings||[]).length){alert('Todavía no hay dibujos para descargar. Estarán disponibles al mostrarlos.');return}
+  const entries=galleryItems(S.drawings);
+  const doc='<!doctype html><html lang="es"><meta charset="utf-8"><title>Galería de dibujos BICG</title><style>body{font-family:Calibri,Arial;background:#f5f8ff;padding:35px;color:#1E1B8C}h1{font-size:38px}main{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.drawing{background:white;padding:12px;border-radius:15px}.drawing img{width:100%;aspect-ratio:16/10;object-fit:contain}b{display:block;padding:10px}@media print{main{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){main{grid-template-columns:1fr}}</style><h1>El cambio, en trazos</h1><p>'+safe(S.phrase)+'</p><main>'+entries.map(d=>'<div class="drawing"><img src="'+d.src+'"><b>'+safe(d.name)+'</b></div>').join('')+'</main></html>';
+  const blob=new Blob([doc],{type:'text/html;charset=utf-8'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download='BICG-galeria-dibujos.html';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+};
+function copy(v,btn){
+  const label=btn.textContent;
+  const done=()=>{btn.textContent='Copiado ✓';setTimeout(()=>{btn.textContent=label},1500)};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(v).then(done,()=>prompt('Copia este texto:',v));
+  else prompt('Copia este texto:',v);
+}
+
+/* ---------- reloj ---------- */
+setInterval(()=>{
+  if(!S)return;
+  const stage=stageOf(),d=isDrawing();
+  const rem=stage==='drawing'?S.endAt-nowMs():stage==='lobby'?TIME_MS:0;
+  const urgent=rem<30000&&stage==='drawing';
+  if(role==='host'){$('hostTimer').textContent=timer(rem);$('hostTimer').classList.toggle('urgent',urgent)}
+  if(role==='participant'){
+    $('participantTimer').textContent=timer(rem);$('participantTimer').classList.toggle('urgent',urgent);
+    if(d!==wasDrawing){wasDrawing=d;renderParticipant()}
+    // Al acabar el tiempo se envía solo lo que haya dibujado (con margen de 5 s).
+    if(stage==='drawing'&&!d&&!submitted&&!busy&&strokes.length&&nowMs()-lastAuto>1500&&nowMs()<S.endAt+5000){lastAuto=nowMs();submit(true)}
+  }
+},250);
+
+/* ---------- botones ---------- */
+$('createBtn').onclick=hostCreate;
+$('joinBtn').onclick=()=>show('joinView');
+$('backJoin').onclick=()=>show('home');
+$('connectBtn').onclick=joinRoom;
+$('startBtn').onclick=start;
+$('revealBtn').onclick=reveal;
+$('restartBtn').onclick=reset;
+$('namesChk').onchange=()=>post('/api/rooms/'+room+'/names',{k:hostKey,showNames:$('namesChk').checked});
+$('copyLinkBtn').onclick=()=>copy(inviteUrl(),$('copyLinkBtn'));
+$('copyCodeBtn').onclick=()=>copy(room,$('copyCodeBtn'));
+$('copyHostBtn').onclick=()=>copy(inviteUrl()+'#k='+hostKey,$('copyHostBtn'));
+$('presentBtn').onclick=()=>{
+  document.body.classList.toggle('present');
+  const on=document.body.classList.contains('present');
+  $('presentBtn').textContent=on?'Salir de proyección':'⛶ Modo proyección';
+  $('hostTitle').style.display=on?'none':'';
+};
+['nameInput','roomInput'].forEach(id=>$(id).addEventListener('keydown',e=>{if(e.key==='Enter')joinRoom()}));
+
+/* ---------- arranque ---------- */
+(function init(){
+  $('nameInput').value=name;
+  const q=(new URLSearchParams(location.search).get('room')||'').toUpperCase().replace(/[^A-Z2-9]/g,'').slice(0,6);
+  const hm=location.hash.match(/k=([A-Za-z0-9_-]+)/);
+  if(q&&hm){ls.set('dlf_k_'+q,hm[1]);history.replaceState(null,'',location.pathname+location.search)}
+  if(!q){show('home');return}
+  room=q;$('roomInput').value=q;
+  const key=ls.get('dlf_k_'+q);
+  if(!key){show('joinView');return}
+  fetch('/api/rooms/'+q).then(r=>{
+    if(r.status===404){ls.del('dlf_k_'+q);alert('La sesión '+q+' ya no existe. Crea una nueva.');history.replaceState(null,'','/');room='';show('home');return}
+    hostKey=key;enterHost();
+  }).catch(()=>{show('joinView')});
+})();
+})();
+</script></body></html>
